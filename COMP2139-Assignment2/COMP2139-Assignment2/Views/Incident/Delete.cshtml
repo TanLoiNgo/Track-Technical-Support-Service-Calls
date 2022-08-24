@@ -1,0 +1,18 @@
+﻿@model Incident
+@{
+    ViewBag.Title = "Delete Incident";
+}
+
+<h1>Confirm Deletion</h1>
+<p>Do  you want to delete <b>@Model.Title</b>?</p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit"
+            class="btn btn-primary">
+        Delete
+    </button>
+    <a asp-controller="Incident"
+       asp-action="Index"
+       class="btn btn-primary">Cancel</a>
+</form>

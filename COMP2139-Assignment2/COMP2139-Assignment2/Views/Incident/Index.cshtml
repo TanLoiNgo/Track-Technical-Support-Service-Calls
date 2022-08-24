@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Incident>
+@{
+    ViewBag.Title = "Incident";
+    string isActive(string status)
+    {
+        string active = "";
+        try
+        {
+            active = ViewContext.RouteData.Values["filter"].ToString();
+        }
+        catch (Exception e)
+        {
+            active = "all";
+        }
+
+        if (status == active)
+        {
+            return "active";
+        }
+        return "";
+    }
+}
+<h2> Incident Manager</h2>
+<a role="button" class="m-2 @isActive("all")" asp-controller="Incident" asp-route-filter="all">All incidents</a>
+<a role="button" class="m-2 @isActive("all")" asp-controller="Incident" asp-route-filter="unassigned">Unassigned incidents</a>
+<a role="button" class="m-2 @isActive("open")" asp-controller="Incident" asp-route-filter="open">Open incidents</a>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Product</th>
+            <th scope="col">Date opened</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Incident incident in Model)
+        {
+            <tr>
+                <td>@incident.Title</td>
+                <td>@incident.Customer.FirstName</td>
+                <td>@incident.Product.Name</td>
+                <td>@incident.DateOpened</td>
+                <td>
+                    <a class="btn btn-primary"
+                       asp-controller="Incident"
+                       asp-action="Edit"
+                       asp-route-id="@incident.Id"
+                       role="button">Edit</a>
+                </td>
+                <td>
+                    <a class="btn btn-primary"
+                       asp-controller="Incident"
+                       asp-action="Delete"
+                       asp-route-id="@incident.Id"
+                       role="button">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a role="button" asp-action="Add" class="btn btn-primary" asp-controller="Incident">Add Incident</a>
+
+

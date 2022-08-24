@@ -1,0 +1,61 @@
+﻿@model Incident
+@{
+    string title = ViewBag.Action + " Incident";
+    ViewBag.Title = title;
+
+}
+
+<h1>@title</h1>
+
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+        <label asp-for="CustomerId">Customer</label>
+        <select asp-for="CustomerId" class="form-control">
+            <option value="">Select a Customer</option>
+            @foreach (Customer c in ViewBag.Customers)
+            {
+                <option value="@c.Id">@c.FirstName @c.LastName</option>
+            }
+        </select>
+        <p class="text-danger">@Html.ValidationMessageFor(model => model.CustomerId)</p>
+    </div>
+    <div class="form-group">
+        <label asp-for="ProductId">Product</label>
+        <select asp-for="ProductId" class="form-control">
+            <option value="">Select a Product</option>
+            @foreach (Product p in ViewBag.Products)
+            {
+                <option value="@p.Id">@p.Name</option>
+            }
+        </select>
+        <p class="text-danger">@Html.ValidationMessageFor(model => model.ProductId)</p>
+    </div>
+    <div class="form-group">
+        <label asp-for="Title">Title</label>
+        <input asp-for="Title" type="text" class="form-control" id="firstName" placeholder="Enter title">
+        <p class="text-danger">@Html.ValidationMessageFor(model => model.Title)</p>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <textarea asp-for="Description" type="text" class="form-control" rows="2" id="lastName" placeholder="Enter Description"></textarea>
+        <p class="text-danger">@Html.ValidationMessageFor(model => model.Description)</p>
+    </div>
+    <div class="form-group">
+        <label asp-for="TechnicianId">Technician</label>
+        <select asp-for="TechnicianId" class="form-control"  asp-items="@(new SelectList(ViewBag.Technicians, "Id", "Name"))">
+            <option value="">Select a Technician</option>
+           
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateOpened">Date Opend</label>
+        <input asp-for="DateOpened" type="datetime" class="form-control" id="address" value="@DateTime.Now">
+    </div>
+    <div class="form-group">
+        <label asp-for="DateClosed">Date Closed</label>
+        <input asp-for="DateClosed" type="datetime" class="form-control" id="city">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" asp-controller="Incident" class="btn btn-primary">Cancel</a>
+</form>

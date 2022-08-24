@@ -1,0 +1,109 @@
+﻿@model Customer
+
+@{
+    string title = ViewBag.Action + " Customer";
+    ViewBag.Title = title;
+}
+
+<h1>@title</h1>
+@section scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/minimum-age.js"></script>
+}
+
+<form asp-action="Edit" method="post">
+    <div class="form-group row">
+        <div class="col-sm-2"><label>First Name:</label></div>
+        <div class="col-sm-4">
+            <input type="text" asp-for="FirstName" class="form-control" id="firstName" placeholder="Enter First Name" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="@Model.FirstName" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-2"><label>Last Name:</label></div>
+        <div class="col-sm-4">
+            <input type="text" asp-for="LastName" class="form-control" id="lastName" placeholder="Enter Last Name" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="@Model.LastName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-2"><label>Address:</label></div>
+        <div class="col-sm-4">
+            <input type="text" asp-for="Address" class="form-control" id="address" placeholder="Enter Address" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="@Model.Address" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-2"><label>City:</label></div>
+        <div class="col-sm-4">
+            <input type="text" asp-for="City" class="form-control" id="city" placeholder="Enter City" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="@Model.City" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-2"><label>State:</label></div>
+        <div class="col-sm-4">
+            <input type="text" asp-for="State" class="form-control" id="state" placeholder="Enter State" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="@Model.State" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-2"><label>Postal Code:</label></div>
+        <div class="col-sm-4">
+            <input type="text" asp-for="PostalCode" class="form-control" id="postalCode" placeholder="Enter Postal Code" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="@Model.PostalCode" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-2"><label>Country:</label></div>
+        <div class="col-sm-4">
+            <select asp-for="CountryId" class="form-control" asp-items="@(new SelectList(ViewBag.Countries, "Id", "Name"))">
+                <option value="">Select a country</option>
+            </select>
+        </div>
+        <div class="col">
+            <span asp-validation-for="CountryId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-2"><label>Email:</label></div>
+        <div class="col-sm-4">
+            <input type="text" asp-for="@Model.Email" class="form-control" id="email" placeholder="Enter Email" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="@Model.Email" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-2"><label>Phone:</label></div>
+        <div class="col-sm-4">
+            <input type="text" asp-for="Phone" class="form-control" id="phone" placeholder="Enter Phone Number" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" asp-controller="Customer" class="btn btn-primary">Cancel</a>
+</form>

@@ -1,0 +1,40 @@
+﻿@model Registration
+@{
+    ViewBag.Title = "Registrations";
+}
+
+<h1>Customer: @ViewBag.CustomerName</h1>
+
+<h2>Registrations</h2>
+<table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Prodct</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Registration registration in ViewBag.Registrations)
+            {
+                <tr>
+                    <th scope="row">@registration.Product.Name</th>
+                    <td>
+                        <form asp-action="Delete" method="post">
+                            <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId" />
+                            <input type="hidden" asp-for="ProductId" value="@registration.Product.Id" />
+                            <button type="submit" class="btn btn-primary">Delete</button>
+                        </form>                       
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <form asp-action="Register" method="post">
+        <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId"/>
+        <div class="form-group">
+            <select name="ProductId" class="form-control"
+                    asp-items="@(new SelectList(ViewBag.Products, "Id", "Name"))"></select>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>

@@ -1,0 +1,46 @@
+﻿@model Incident
+@{ string title = ViewBag.Action + " Incident";
+    ViewBag.Title = title;
+}
+<h1>@title</h1>
+
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+        <label asp-for="TechnicianId">Technician</label>
+        <p>@ViewBag.Technician.Name</p>
+        <input asp-for="TechnicianId" type="hidden" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="CustomerId">Customer</label>
+        <p>@ViewBag.Customer.FullName</p>
+        <input asp-for="CustomerId" type="hidden" class="form-control" />
+        <p class="text-danger">@Html.ValidationMessageFor(model => model.CustomerId)</p>
+    </div>
+    <div class="form-group">
+        <label asp-for="ProductId">Product</label>
+        <p>@ViewBag.Product.Name</p>
+        <input asp-for="ProductId" type="hidden" class="form-control" />
+        <p class="text-danger">@Html.ValidationMessageFor(model => model.ProductId)</p>
+    </div>
+    <div class="form-group">
+        <label asp-for="Title">Title</label>
+        <input asp-for="Title" type="text" class="form-control" id="firstName" placeholder="Enter title">
+        <p class="text-danger">@Html.ValidationMessageFor(model => model.Title)</p>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateOpened">Date Opend</label>
+        <input asp-for="DateOpened" type="hidden" class="form-control" id="address" value="@DateTime.Now">
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <input asp-for="Description" type="text" class="form-control" id="lastName" placeholder="Enter Description">
+        <p class="text-danger">@Html.ValidationMessageFor(model => model.Description)</p>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateClosed">Date Closed</label>
+        <input asp-for="DateClosed" type="datetime" class="form-control" id="city">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="List" asp-controller="TechIncident" class="btn btn-primary">Cancel</a>
+</form>

@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Technician>
+@{
+    ViewBag.Title = "Get Technician";
+}
+
+<h1>Technician</h1>
+<form asp-action="Select" method="post">
+    <div class="form-group">
+        <select name="id" class="form-control"
+                asp-items="@(new SelectList(Model, "Id", "Name"))"></select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Select</button>
+</form>
